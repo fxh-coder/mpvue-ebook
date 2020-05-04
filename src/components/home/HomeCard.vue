@@ -4,31 +4,26 @@
       <div class="user-info">
         <div class="avatar-wrapper">
           <ImageView
-            src="https://www.youbaobao.xyz/mpvue-res/logo.jpg"
+            :src="avatar"
             round
+            height="100%"
+            mode="scaleToFill"
           />
         </div>
-        <div class="nickname">{{'米老鼠'}}</div>
-        <div class="shelf-text">暑假共有{{3}}本好书</div>
+        <div class="nickname">{{nickname}}</div>
+        <div class="shelf-text">暑假共有{{data.num}}本好书</div>
         <div class="round-item"></div>
         <div class="shelf-text">特别精选</div>
       </div>
       <div class="book-info">
         <div class="book-wrapper">
-          <div class="book-img-wrapper">
-            <ImageView
-              src="https://www.youbaobao.xyz/book/res/img//EarthSciences/978-981-10-3713-9_CoverFigure.jpg"
-            />
-          </div>
-          <div class="book-img-wrapper">
-            <ImageView
-              src="https://www.youbaobao.xyz/book/res/img//EarthSciences/978-981-10-3713-9_CoverFigure.jpg"
-            />
-          </div>
-          <div class="book-img-wrapper">
-            <ImageView
-              src="https://www.youbaobao.xyz/book/res/img//EarthSciences/978-981-10-3713-9_CoverFigure.jpg"
-            />
+          <div
+            class="book-img-wrapper"
+            v-for="(item, index) in bookList"
+            :key="index"
+            @click="onBookClick"
+          >
+            <ImageView :src="item.cover" />
           </div>
         </div>
         <div class="shelf-wrapper">
@@ -66,9 +61,22 @@ export default {
       default: 0
     }
   },
+  computed: {
+    avatar() {
+      return (this.data && this.data.userInfo && this.data.userInfo.avatarUrl) || ''
+    },
+    nickname() {
+      return (this.data && this.data.userInfo && this.data.userInfo.nickName) || ''
+    },
+    bookList() {
+      return (this.data && this.data.bookList) || []
+    }
+  },
   methods: {
     gotoShelf() {},
-    onBookClick() {},
+    onBookClick() {
+      this.$emit('onClick')
+    },
     sign() {},
     onFeedBackClick() {
       Dialog.confirm({
