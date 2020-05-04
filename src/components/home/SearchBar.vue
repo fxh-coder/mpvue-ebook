@@ -17,7 +17,7 @@
         @input="onChange"
         confirm-type="search"
         @confirm="onConfirm"
-        placeholder-style="color: #adb4be"
+        placeholder-style="color: #adb4be; font-size: 15px;"
       />
       <van-icon
         class="clear"
