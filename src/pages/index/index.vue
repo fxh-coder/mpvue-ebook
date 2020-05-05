@@ -158,7 +158,14 @@ export default {
         hideLoading()
       })
     },
-    onSearchBarClick() {},
+    onSearchBarClick() {
+      this.$router.push({
+        path: '/pages/search/main',
+        query: {
+          hotSearch: this.hotSearch
+        }
+      })
+    },
     onBannerClick() {},
     onCategoryMoreClick() {},
     onHomeBookClick() {},
