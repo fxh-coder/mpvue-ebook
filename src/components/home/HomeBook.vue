@@ -1,6 +1,6 @@
 <template>
   <div class="home-book">
-      <div class="home-book-header">{{title}}</div>
+      <div class="home-book-header" v-if="showTitle">{{title}}</div>
       <div class="home-book-content">
         <div class="home-book-row" v-for="(item, index) in bookData" :key="index">
           <div
@@ -11,7 +11,7 @@
             <div
               class="book-wrapper"
               :style="{ flexDirection: mode === HOME_BOOK_MODE.COL ? 'column' : 'row' }"
-              @click="onBookClick"
+              @click="onBookClick(book)"
               v-if="mode === HOME_BOOK_MODE.COL || mode === HOME_BOOK_MODE.ROW"
             >
               <ImageView :src="book.cover" />
@@ -29,7 +29,7 @@
                 </div>
               </div>
             </div>
-            <div class="category-wrapper" v-else>
+            <div class="category-wrapper" v-else @click="onBookClick(book)">
               <div class="category-text">{{book.text}}</div>
               <div class="category-num">{{book.num}}本书</div>
               <div class="category-img-wrapper">
@@ -120,8 +120,8 @@ export default {
     onMoreClick() {
       this.$emit('onMoreClick')
     },
-    onBookClick() {
-      this.$emit('onBookClick')
+    onBookClick(book) {
+      this.$emit('onBookClick', book)
     }
   }
 }

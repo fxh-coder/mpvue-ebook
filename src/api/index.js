@@ -42,3 +42,43 @@ export function search(params) {
 export function hotSearch() {
   return get(`${API_URL}/book/hot-search`)
 }
+
+export function bookDetail(params) {
+  return get(`${API_URL}/book/detail`, params)
+}
+
+export function bookRankSave(params) {
+  return get(`${API_URL}/book/rank/save`, params)
+}
+
+export function bookContents(params) {
+  return get(`${API_URL}/book/contents`, params)
+}
+
+export function bookIsInShelf(params) {
+  return get(`${API_URL}/book/shelf/get`, params)
+}
+
+export function bookShelfSave(params) {
+  return get(`${API_URL}/book/shelf/save`, {
+    shelf: JSON.stringify(params)
+  })
+}
+
+export function bookShelfRemove(params) {
+  return get(`${API_URL}/book/shelf/remove`, {
+    shelf: JSON.stringify(params)
+  })
+}
+
+export function searchList(params) {
+  return get(`${API_URL}/book/search-list`, params)
+}
+
+export function categoryList() {
+  return get(`${API_URL}/book/category/list/v2`)
+}
+
+export function userDay(params) {
+  return get(`${API_URL}/user/day`, params)
+}
