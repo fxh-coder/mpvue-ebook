@@ -6,7 +6,7 @@
         @onClick='onSearchBarClick'
         :hot-search="hotSearch"
       />
-      <HomeCard :data="homeCard" />
+      <HomeCard :data="homeCard" @onClick="onHomeBookClick" />
       <HomeBanner
         img="http://www.youbaobao.xyz/book/res/bg.jpg"
         title="mpvue2.0实战多端小程序上线啦"
@@ -52,13 +52,13 @@
       <div class='home-book'>
         <HomeBook
           title="分类"
-          :row="2"
+          :row="3"
           :col="2"
           :data="category"
           mode="category"
           btn-text="查看全部"
           @onMoreClick="onCategoryMoreClick"
-          @onBookClick="onHomeBookClick"
+          @onBookClick="onCategoryClick"
         />
       </div>
     </div>
@@ -167,8 +167,27 @@ export default {
       })
     },
     onBannerClick() {},
-    onCategoryMoreClick() {},
-    onHomeBookClick() {},
+    onCategoryClick(category) {
+      this.$router.push({
+        path: '/pages/list/main',
+        query: {
+          key: 'categoryId',
+          text: category.category,
+          title: category.categoryText
+        }
+      })
+    },
+    onCategoryMoreClick() {
+      this.$router.push({
+        path: '/pages/categoryList/main'
+      })
+    },
+    onHomeBookClick(book) {
+      this.$router.push({
+        path: '/pages/detail/main',
+        query: { fileName: book.fileName }
+      })
+    },
     getUserInfo() {
       const onOpenIdComplete = (openId, userInfo) => {
         this.getHomeData(openId, userInfo)

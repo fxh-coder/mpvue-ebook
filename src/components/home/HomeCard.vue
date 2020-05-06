@@ -21,12 +21,12 @@
             class="book-img-wrapper"
             v-for="(item, index) in bookList"
             :key="index"
-            @click="onBookClick"
+            @click="onBookClick(item)"
           >
             <ImageView :src="item.cover" />
           </div>
         </div>
-        <div class="shelf-wrapper">
+        <div class="shelf-wrapper" @click="gotoShelf">
           <div class="shelf">书架</div>
           <van-icon
             class="arrow"
@@ -73,9 +73,11 @@ export default {
     }
   },
   methods: {
-    gotoShelf() {},
-    onBookClick() {
-      this.$emit('onClick')
+    gotoShelf() {
+      this.$router.push('/pages/shelf/main')
+    },
+    onBookClick(item) {
+      this.$emit('onClick', item)
     },
     sign() {},
     onFeedBackClick() {
